@@ -1,0 +1,93 @@
+{
+"QUESTION_1": {
+"question": "O edital deve contemplar matriz de alocação de riscos? É possível exigir programa de integridade?",
+"model_answer": "1) Sim. Nos contratos de grande vulto, a matriz de alocação de riscos é obrigatória (Lei nº 14.133/2021, Art. 103 c/c Art. 6º, XXII). 2) Sim. É possível exigir programa de integridade nas contratações de grande vulto, devendo ser implementado pelo vencedor no prazo legal (Art. 25, §4º).",
+"difficulty_level": 2,
+"classification": "Nível 2 (Analista)",
+"justification": "Aplicação direta de dispositivos da Lei de Licitações.",
+"area_of_expertise": "Direito Administrativo – Licitações",
+"main_legal_reference": "Lei nº 14.133/2021, arts. 6º, XXII; 25, §4º; 103"
+},
+"QUESTION_2": {
+"question": "A contratada pode extinguir o contrato? Quais seus direitos?",
+"model_answer": "1) Sim. O atraso superior a 2 meses no pagamento autoriza a rescisão (Art. 137, XV, Lei nº 14.133/2021). 2) O contratado tem direito ao pagamento devido, indenização por prejuízos e custos de desmobilização (Art. 137, §2º).",
+"difficulty_level": 2,
+"classification": "Nível 2 (Analista)",
+"justification": "Exige conhecimento de hipóteses legais de extinção contratual.",
+"area_of_expertise": "Direito Administrativo – Contratos",
+"main_legal_reference": "Lei nº 14.133/2021, art. 137"
+},
+"QUESTION_3": {
+"question": "Há responsabilização por omissão? Quem pode denunciar ao TCU?",
+"model_answer": "1) Sim. O responsável pelo controle interno responde solidariamente se não comunicar irregularidades (CF, art. 74, §1º). 2) Qualquer cidadão, partido político, associação ou sindicato pode denunciar ao TCU (CF, art. 74, §2º).",
+"difficulty_level": 2,
+"classification": "Nível 2 (Analista)",
+"justification": "Aplicação direta da Constituição.",
+"area_of_expertise": "Direito Constitucional – Controle",
+"main_legal_reference": "CF, art. 74, §§1º e 2º"
+},
+"QUESTION_4": {
+"question": "Prazo do recurso e revisão de ofício?",
+"model_answer": "1) O prazo é de 10 dias, na ausência de norma específica (Lei nº 9.784/1999, art. 59). 2) Não impede. A Administração pode anular atos ilegais de ofício, respeitado o contraditório (art. 53).",
+"difficulty_level": 2,
+"classification": "Nível 2 (Analista)",
+"justification": "Conhecimento de processo administrativo federal.",
+"area_of_expertise": "Direito Administrativo",
+"main_legal_reference": "Lei nº 9.784/1999, arts. 53 e 59"
+},
+"QUESTION_5": {
+"question": "Há usucapião? Pode pedir restituição?",
+"model_answer": "1) Não. A posse é precária (comodato), não havendo animus domini. 2) Sim. Pode formular pedido contraposto ou reconvenção para restituição do imóvel.",
+"difficulty_level": 3,
+"classification": "Nível 3 (Juiz de Direito)",
+"justification": "Exige análise da natureza da posse.",
+"area_of_expertise": "Direito Civil",
+"main_legal_reference": "CC, arts. 1.208 e 1.238"
+},
+"QUESTION_6": {
+"question": "Providência e competência?",
+"model_answer": "1) Adoção, com consentimento dos pais biológicos (ECA). 2) Vara da Infância e Juventude do domicílio da criança.",
+"difficulty_level": 2,
+"classification": "Nível 2 (Analista)",
+"justification": "Aplicação direta do ECA.",
+"area_of_expertise": "Direito da Criança e Adolescente",
+"main_legal_reference": "ECA, arts. 39 e seguintes"
+},
+"QUESTION_7": {
+"question": "Direito à eliminação de dados? Responsabilidade da operadora?",
+"model_answer": "1) Sim. O titular pode revogar consentimento e requerer eliminação (LGPD, art. 18, VI). 2) Sim, responde solidariamente se descumprir a LGPD.",
+"difficulty_level": 3,
+"classification": "Nível 3 (Juiz de Direito)",
+"justification": "Interpretação da LGPD.",
+"area_of_expertise": "Direito Digital",
+"main_legal_reference": "Lei nº 13.709/2018, art. 18"
+},
+"QUESTION_8": {
+"question": "Ação cabível e penhora do táxi?",
+"model_answer": "1) Ação de execução de título extrajudicial (cheque), prazo de 6 meses para execução cambial (Lei do Cheque). 2) Não, pois é instrumento de trabalho impenhorável (CPC, art. 833, V).",
+"difficulty_level": 2,
+"classification": "Nível 2 (Analista)",
+"justification": "Conhecimento de execução e impenhorabilidade.",
+"area_of_expertise": "Direito Processual Civil",
+"main_legal_reference": "CPC, art. 833, V; Lei do Cheque"
+},
+
+"QUESTION_9": {
+"question": "Lei ordinária pode alterar LC? Pode controle concentrado?",
+"model_answer": "1) Não, pois lei ordinária não pode alterar matéria reservada à lei complementar. 2) Não, a empresa não tem legitimidade para controle concentrado (art. 103, CF).",
+"difficulty_level": 4,
+"classification": "Nível 4 (Ministro STF/STJ)",
+"justification": "Envolve hierarquia normativa e controle concentrado.",
+"area_of_expertise": "Direito Constitucional",
+"main_legal_reference": "CF, art. 103"
+},
+"QUESTION_10": {
+"question": "Alterações no projeto são constitucionais?",
+"model_answer": "1) Não. Aumento de despesa em projeto de iniciativa privativa do Executivo é vedado. 2) Não. Há vício de pertinência temática (contrabando legislativo).",
+"difficulty_level": 4,
+"classification": "Nível 4 (Ministro STF/STJ)",
+"justification": "Controle de constitucionalidade formal e material.",
+"area_of_expertise": "Direito Constitucional",
+"main_legal_reference": "CF, arts. 61 e princípio da separação dos poderes"
+}
+}

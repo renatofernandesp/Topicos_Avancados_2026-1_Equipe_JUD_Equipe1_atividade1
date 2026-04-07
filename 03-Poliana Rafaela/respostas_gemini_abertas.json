@@ -1,0 +1,94 @@
+{
+
+"QUESTION_1": {
+"question": "O edital deve contemplar matriz de alocação de riscos? É possível exigir programa de integridade?",
+"model_answer": "1) Sim. Nos termos do Art. 103, caput, da Lei nº 14.133/2021, a matriz de alocação de riscos é cláusula obrigatória nos contratos de grande vulto (aqueles cujo valor estimado supera R$ 200 milhões, conforme Art. 6º, XXII). 2) Sim. O Art. 25, § 4º, da referida Lei estabelece que, nas contratações de obras, serviços e fornecimentos de grande vulto, o edital deverá prever a obrigatoriedade de implantação de programa de integridade pelo licitante vencedor, no prazo de 6 (seis) meses contado da celebração do contrato.",
+"difficulty_level": 2,
+"classification": "Nível 2 (Analista)",
+"justification": "Aplicação de regras objetivas e prazos específicos da Nova Lei de Licitações para contratos de grande vulto.",
+"area_of_expertise": "Direito Administrativo – Licitações",
+"main_legal_reference": "Lei nº 14.133/2021, Art. 6º, XXII; Art. 25, § 4º; Art. 103, caput"
+},
+"QUESTION_2": {
+"question": "A contratada tem direito à extinção do contrato? Quais seus direitos em caso de culpa do Estado?",
+"model_answer": "1) Sim. O Art. 137, §2º, IV, da Lei nº 14.133/2021 autoriza a extinção do contrato pelo contratado em caso de atraso superior a 2 meses (60 dias) nos pagamentos. O atraso de 80 dias justifica a medida. 2) Extinto o contrato por culpa da Administração, o contratado tem direito: ao ressarcimento dos prejuízos comprovados, à devolução da garantia, ao pagamento pelas prestações executadas e ao custo de desmobilização (Art. 139, I a IV, e §1º da Lei nº 14.133/2021).",
+"difficulty_level": 3,
+"classification": "Nível 3 (Juiz de Direito)",
+"justification": "Necessidade de identificar o prazo legal de mora administrativa e as consequências indenizatórias da rescisão culposa.",
+"area_of_expertise": "Direito Administrativo – Contratos",
+"main_legal_reference": "Lei nº 14.133/2021, Art. 137, §2º, IV e Art. 139"
+},
+"QUESTION_3": {
+"question": "Jaqueline pode ser responsabilizada? Quem pode denunciar ao TCU?",
+"model_answer": "1) Sim. Conforme o Art. 74, § 1º, da CRFB/88, os responsáveis pelo controle interno, ao tomarem conhecimento de qualquer irregularidade ou ilegalidade, dela darão ciência ao Tribunal de Contas, sob pena de responsabilidade solidária. 2) Qualquer cidadão, partido político, associação ou sindicato é parte legítima para, na forma da lei, denunciar irregularidades ou ilegalidades perante o Tribunal de Contas (Art. 74, § 2º, da CRFB/88).",
+"difficulty_level": 2,
+"classification": "Nível 2 (Analista)",
+"justification": "Conhecimento literal de dispositivos constitucionais sobre controle da administração.",
+"area_of_expertise": "Direito Constitucional – Controle de Administração",
+"main_legal_reference": "CRFB/88, Art. 74, §§ 1º e 2º"
+},
+"QUESTION_4": {
+"question": "Qual o prazo para o recurso X? O não conhecimento impede a revisão de ofício?",
+"model_answer": "1) O prazo é de 10 (dez) dias, contado a partir da ciência ou divulgação oficial da decisão, conforme o Art. 59 da Lei nº 9.784/99 (Lei do Processo Administrativo Federal). 2) Não. O não conhecimento do recurso não impede a Administração de rever de ofício o ato ilegal, desde que não ocorrida a preclusão administrativa, em observância ao princípio da autotutela, conforme o Art. 63, § 2º, da Lei nº 9.784/99 e as Súmulas 346 e 473 do STF.",
+"difficulty_level": 3,
+"classification": "Nível 3 (Juiz de Direito)",
+"justification": "Interpretação da dualidade entre inadmissibilidade recursal e dever de autotutela administrativa.",
+"area_of_expertise": "Direito Administrativo – Processo Administrativo",
+"main_legal_reference": "Lei nº 9.784/99, Arts. 59 e 63, § 2º; Súmula 473 STF"
+},
+"QUESTION_5": {
+"question": "Maria tem direito de usucapir? João pode pedir a restituição na contestação da usucapião?",
+"model_answer": "1) Não. Maria possui o imóvel em razão de um contrato de comodato (empréstimo), o que configura posse precária, desprovida de 'animus domini'. A alteração unilateral da destinação do imóvel não transmuda a natureza da posse de forma a permitir a usucapião contra o proprietário que mantém a vigilância e notifica para devolução. 2) Sim. A contestação na ação de usucapião permite ao proprietário alegar sua defesa e, em virtude do caráter dúplice das ações possessórias ou da natureza da defesa em ações reais, pleitear a proteção de sua posse e a restituição do bem, embora o caminho técnico mais preciso no rito comum seja a reconvenção (Art. 343 CPC). Contudo, a jurisprudência admite a proteção da posse do proprietário na contestação se demonstrado o esbulho pela não devolução após notificação.",
+"difficulty_level": 3,
+"classification": "Nível 3 (Juiz de Direito)",
+"justification": "Exige distinção entre detenção/posse precária e posse 'ad usucapionem', além de técnica processual defensiva.",
+"area_of_expertise": "Direito Civil – Coisas",
+"main_legal_reference": "Código Civil, Art. 1.203 e Art. 1.208; CPC, Art. 343"
+},
+"QUESTION_6": {
+"question": "Quais providências para a filiação definitiva? Onde deve ser ajuizada?",
+"model_answer": "1) A providência é o ajuizamento de uma Ação de Adoção cumulada com destituição do poder familiar (ou com base no consentimento dos pais biológicos). Como Tália tem 12 anos, é necessário o seu consentimento em audiência (Art. 45, § 2º, ECA). A sentença de adoção determinará a lavratura de novo registro com o nome dos adotantes e a exclusão dos biológicos (Art. 47 ECA). 2) A ação deve ser ajuizada no foro do domicílio de quem detém a guarda da criança ou adolescente, ou seja, no domicílio de Lúcio e Raquel (Art. 147, I, do ECA), perante a Justiça da Infância e da Juventude.",
+"difficulty_level": 2,
+"classification": "Nível 2 (Analista)",
+"justification": "Conhecimento de regras procedimentais e de competência do Estatuto da Criança e do Adolescente.",
+"area_of_expertise": "Direito Civil – Família e ECA",
+"main_legal_reference": "ECA, Arts. 45, 47 e 147, I"
+},
+"QUESTION_7": {
+"question": "Maria pode eliminar dados de marketing? A SuperData responde pelos danos?",
+"model_answer": "1) Sim. O titular tem direito à eliminação dos dados pessoais tratados com o seu consentimento, nos termos do Art. 18, VI, da LGPD (Lei nº 13.709/2018). O fato de os dados não serem sensíveis não afasta o direito à revogação do consentimento e exclusão para fins de marketing. 2) Sim. Embora seja operadora, a SuperData responde solidariamente pelos danos se descumprir as obrigações da LGPD ou se não seguir as instruções lícitas do controlador. No caso, ao manter o tratamento após a ciência da oposição da titular e falhar em cessar o marketing indesejado em conjunto com a controladora, atrai a responsabilidade (Art. 42, § 1º, I, LGPD).",
+"difficulty_level": 3,
+"classification": "Nível 3 (Juiz de Direito)",
+"justification": "Análise de direitos do titular e do regime de responsabilidade solidária entre controlador e operador na LGPD.",
+"area_of_expertise": "Direito Digital – LGPD",
+"main_legal_reference": "Lei nº 13.709/2018, Arts. 18, VI e 42, §1º"
+},
+"QUESTION_8": {
+"question": "Qual a ação mais célere e prazo prescricional? O táxi pode ser penhorado?",
+"model_answer": "1) A ação mais célere é a Ação de Execução de Título Extrajudicial, fundamentada no Art. 784, I, do CPC. O prazo prescricional do cheque para execução é de 6 (seis) meses contados do término do prazo de apresentação (Art. 59 da Lei nº 7.357/85). 2) Em regra, não. O táxi é considerado instrumento necessário ao exercício da profissão do executado, sendo impenhorável nos termos do Art. 833, V, do CPC, salvo se de valor elevadíssimo que supere as necessidades de subsistência, o que não parece ser o caso.",
+"difficulty_level": 2,
+"classification": "Nível 2 (Analista)",
+"justification": "Conhecimento de prazos da Lei do Cheque e hipóteses de impenhorabilidade do CPC.",
+"area_of_expertise": "Direito Processual Civil – Execução",
+"main_legal_reference": "Lei nº 7.357/85, Art. 59; CPC, Art. 833, V"
+},
+
+"QUESTION_9": {
+"question": "Pode Lei Ordinária alterar Lei Complementar? Sociedade empresária pode ajuizar ADI?",
+"model_answer": "1) Sim, desde que a matéria tratada na Lei Complementar não seja formalmente reservada à LC pela Constituição. Se a matéria é de lei ordinária, mas foi veiculada por LC, esta é considerada materialmente ordinária, podendo ser alterada por lei ordinária posterior. No caso, atividades econômicas gerais não têm reserva de LC. 2) Não. A sociedade empresária não possui legitimidade ativa para propor ações de controle concentrado (ADI, ADECON, ADPF) perante o STF, conforme o rol taxativo do Art. 103 da CRFB/88.",
+"difficulty_level": 4,
+"classification": "Nível 4 (Ministro STF/STJ)",
+"justification": "Teoria da deslegalização/receptividade e legitimidade ativa no controle concentrado.",
+"area_of_expertise": "Direito Constitucional – Processo Legislativo e Controle",
+"main_legal_reference": "CRFB/88, Arts. 102 e 103"
+},
+"QUESTION_10": {
+"question": "Aumento por emenda parlamentar é constitucional? Alteração do regime jurídico estranha ao objeto é válida?",
+"model_answer": "1) Não. Embora o Legislativo possa emendar projetos de iniciativa do Executivo, o Art. 63, I, da CRFB/88 proíbe o aumento de despesa prevista nos projetos de iniciativa exclusiva do Presidente da República (ressalvadas emendas ao orçamento). Como a iniciativa para aumento de remuneração de servidores federais é exclusiva do Presidente (Art. 61, §1º, II, 'a'), a emenda que dobra o valor é inconstitucional. 2) Não. Trata-se de 'contrabando legislativo' ou falta de pertinência temática. O STF possui entendimento consolidado de que viola o devido processo legislativo a inclusão de matérias estranhas ao objeto original do projeto de lei (emendas sem pertinência), conforme o princípio da democraticidade e lealdade legislativa.",
+"difficulty_level": 4,
+"classification": "Nível 4 (Ministro STF/STJ)",
+"justification": "Limites ao poder de emenda parlamentar em projetos de iniciativa reservada e jurisprudência sobre pertinência temática.",
+"area_of_expertise": "Direito Constitucional – Processo Legislativo",
+"main_legal_reference": "CRFB/88, Arts. 61, §1º, II e 63, I; Jurisprudência do STF (ADI 5127)"
+}
+}

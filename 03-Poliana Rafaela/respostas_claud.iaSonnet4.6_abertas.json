@@ -1,0 +1,94 @@
+{
+  "QUESTION_1": {
+    "question": "O edital em questão deveria contemplar a matriz de alocação de riscos entre contratante e contratado? Justifique. | É possível exigir do licitante vencedor a implementação de programa de integridade? Justifique.",
+    "model_answer": "Sim, o edital deve contemplar a matriz de alocação de riscos. Nos termos do art. 103, caput, da Lei nº 14.133/2021, nos contratos de grande vulto (valor superior a R$ 200 milhões - art. 6º, XXII), o edital deve conter matriz de alocação de riscos. Sim, é possível exigir programa de integridade. O art. 25, § 4º, da Lei nº 14.133/2021 prevê que, em contratações de grande vulto, o edital deve exigir do vencedor a implantação de programa de integridade no prazo de 6 meses da celebração do contrato.",
+    "difficulty_level": 2,
+    "classification": "Nível 2 (Analista)",
+    "justification": "Aplicação direta de dispositivos específicos da Nova Lei de Licitações para contratos de grande vulto, exigindo conhecimento de ritos e cláusulas obrigatórias.",
+    "area_of_expertise": "Direito Administrativo – Licitações e Contratos",
+    "main_legal_reference": "Lei nº 14.133/2021, arts. 6º, XXII; 25, §4º; 103, caput"
+  },
+  "QUESTION_2": {
+    "question": "A contratada tem direito à extinção do contrato? Justifique. | Caso haja a extinção do contrato em decorrência de culpa exclusiva do estado Beta, quais os direitos do contratado? Justifique.",
+    "model_answer": "Sim, a contratada tem direito à extinção. O art. 137, II, da Lei nº 14.133/2021 autoriza a rescisão por inadimplemento culposo da Administração, como o atraso superior a 60 dias no pagamento (art. 138). Em caso de extinção por culpa exclusiva do Estado, o contratado tem direito a: i) restituição de garantias; ii) pagamento de serviços executados; iii) indenização por prejuízos comprovados e lucros cessantes (art. 139).",
+    "difficulty_level": 2,
+    "classification": "Nível 2 (Analista)",
+    "justification": "Conhecimento de prazos e hipóteses de rescisão contratual administrativa da Nova Lei de Licitações.",
+    "area_of_expertise": "Direito Administrativo – Contratos Administrativos",
+    "main_legal_reference": "Lei nº 14.133/2021, arts. 137, II; 138; 139"
+  },
+  "QUESTION_3": {
+    "question": "Jaqueline, como agente público responsável pelo controle interno, pode ser responsabilizada por sua omissão? Justifique. | Quem possui legitimidade para denunciar, perante o Tribunal de Contas da União, ilegalidade como a narrada acima? Justifique.",
+    "model_answer": "Sim, Jaqueline pode ser responsabilizada. O art. 74, §2º, CF/88 impõe ao controle interno a comunicação imediata de irregularidades ao TCU, sob pena de responsabilidade solidária (Súmula 347 TCU). Legitimados para denunciar ao TCU: qualquer pessoa física ou jurídica (art. 234, RITCU), especialmente servidor do controle interno e cidadãos (art. 74, §2º, CF/88).",
+    "difficulty_level": 3,
+    "classification": "Nível 3 (Juiz de Direito)",
+    "justification": "Interpretação constitucional do dever de comunicação de irregularidades e legitimidade ativa perante TCU.",
+    "area_of_expertise": "Direito Administrativo – Controle Interno e Externo",
+    "main_legal_reference": "CF/88, art. 74, §2º; Súmula 347 TCU; RITCU, art. 234"
+  },
+  "QUESTION_4": {
+    "question": "Qual o prazo para a interposição do recurso administrativo X em questão? Justifique. | O não conhecimento do recurso X impede que a Administração reveja, de ofício, eventual ilegalidade constatada na parte em que o pedido da sociedade empresária Incrível foi deferido?",
+    "model_answer": "O prazo é de 10 dias (art. 56, Lei nº 9.784/99). Não, o não conhecimento do recurso não impede a revisão de ofício. A Administração pode rever ilegalidades a qualquer tempo, antes da preclusão, por motivo de legalidade (art. 53, Lei nº 9.784/99; art. 5º, LV, CF/88).",
+    "difficulty_level": 2,
+    "classification": "Nível 2 (Analista)",
+    "justification": "Conhecimento de prazos recursais e princípios da autotutela administrativa.",
+    "area_of_expertise": "Direito Administrativo – Processo Administrativo",
+    "main_legal_reference": "Lei nº 9.784/99, arts. 53, 56; CF/88, art. 5º, LV"
+  },
+
+  "QUESTION_5": {
+    "question": "Maria tem direito de usucapir o imóvel? Justifique. | Em contestação, João pode formular pedido de condenação de Maria a restituir o imóvel a seu favor, nos autos da ação de usucapião? Justifique.",
+    "model_answer": "Não. Posse precária de comodato não gera usucapião (art. 1.238, CC; STJ, REsp 1.387.112). João pode formular reconvenção para restituição (CPC, art. 343; natureza petitória da ação de usucapião).",
+    "difficulty_level": 3,
+    "classification": "Nível 3 (Juiz de Direito)",
+    "justification": "Interpretação da qualidade da posse em comodato e conexão com reconvenção em ação petitória.",
+    "area_of_expertise": "Direito Civil – Posse e Usucapião",
+    "main_legal_reference": "CC, art. 1.238; CPC, art. 343; STJ, REsp 1.387.112"
+  },
+  "QUESTION_6": {
+    "question": "Indique as providências jurídicas necessárias para a regularização da relação de filiação de forma definitiva... | Onde deve ser ajuizada a ação judicial? Justifique.",
+    "model_answer": "Ação de adoção com destituição do poder familiar dos pais biológicos (consentidos). Procedimento: ECA, arts. 39-B a 52-D; retificação de registro (Lei 8.560/92, art. 56). Competência: Vara da Infância e Juventude do domicílio da adotanda (ECA, art. 147).",
+    "difficulty_level": 3,
+    "classification": "Nível 3 (Juiz de Direito)",
+    "justification": "Aplicação do sistema de adoção do ECA com destituição consensual e competência especial.",
+    "area_of_expertise": "Direito de Família – Adoção",
+    "main_legal_reference": "ECA, arts. 39-B a 52-D, 147; Lei 8.560/92, art. 56"
+  },
+  "QUESTION_7": {
+    "question": "Maria tem o direito de promover a eliminação de seus dados cadastrais especificamente voltados para as ações de publicidade e marketing? Justifique. | A sociedade empresária SuperData Ltda., na posição de simples operadora de dados pessoais, responde por danos eventualmente causados a Maria? Justifique.",
+    "model_answer": "Sim. Direito à eliminação de dados após finalidade (LGPD, art. 18, I, b); oposição a tratamento para marketing (art. 18, II). Sim, operadora responde solidariamente se descumprir ordem legítima da controladora ou LGPD (art. 42).",
+    "difficulty_level": 3,
+    "classification": "Nível 3 (Juiz de Direito)",
+    "justification": "Interpretação dos direitos da personalidade na LGPD e responsabilidade solidária de operador.",
+    "area_of_expertise": "Direito Digital – LGPD",
+    "main_legal_reference": "LGPD, arts. 18, I, b, II; 42"
+  },
+  "QUESTION_8": {
+    "question": "Qual a ação mais célere que Fernanda deve adotar para cobrar o valor devido e qual é seu prazo prescricional? Justifique. | Considerando que o único bem localizado para satisfação do débito foi o táxi de José, é possível determinar a penhora do automóvel? Justifique.",
+    "model_answer": "Ação de execução de cheque (mais célere - Lei 7.357/85, art. 47; prazo 6 meses da apresentação). Prescrição: 5 anos (CC, art. 206, §5º, I). Sim, penhora possível - táxi não é impenhorável (bem de produção - CPC, art. 833, IX).",
+    "difficulty_level": 2,
+    "classification": "Nível 2 (Analista)",
+    "justification": "Conhecimento de títulos executivos extrajudiciais e impenhorabilidades.",
+    "area_of_expertise": "Direito Civil + Processual Civil – Execução",
+    "main_legal_reference": "Lei 7.357/85, art. 47; CC, art. 206, §5º,I; CPC, art. 833, IX"
+  },
+
+  "QUESTION_9": {
+    "question": "É compatível com a ordem constitucional a alteração, pela Lei Ordinária Federal nº YY, dos requisitos exigidos pela Lei Complementar Federal nº XX? Justifique. | A sociedade empresária pode ajuizar uma ação, de modo a submeter a questão ao controle concentrado de constitucionalidade...",
+    "model_answer": "Não. Hierarquia das leis exige lei complementar para alterar outra LC (CF, art. 61, §1º, d). Não, controle concentrado exige pertinência temática e representatividade (ADI/ADC - legitimados taxativos, CF, art. 103).",
+    "difficulty_level": 4,
+    "classification": "Nível 4 (Ministro STF/STJ)",
+    "justification": "Hierarquia normativa e legitimidade ativa em controle concentrado.",
+    "area_of_expertise": "Direito Constitucional – Controle de Constitucionalidade",
+    "main_legal_reference": "CF, arts. 61, §1º,d; 103"
+  },
+  "QUESTION_10": {
+    "question": "O aumento da gratificação em R$ 200,00... é compatível com a Constituição da República? Justifique. | A alteração de comandos do regime jurídico dos servidores públicos da União... é compatível com a Constituição da República? Justifique.",
+    "model_answer": "Sim. Princípio da anualidade remuneratória não impede emendas parlamentares (CF, art. 169, §4º permite ampliações). Não. Viola iniciativa reservada ao Chefe do Executivo (CF, art. 61, §1º, b, I) e objeto do projeto original.",
+    "difficulty_level": 4,
+    "classification": "Nível 4 (Ministro STF/STJ)",
+    "justification": "Iniciativa de lei e limites ao processo legislativo ordinário.",
+    "area_of_expertise": "Direito Constitucional – Processo Legislativo",
+    "main_legal_reference": "CF, arts. 61, §1º, b,I; 169, §4º"
+  }
+}
