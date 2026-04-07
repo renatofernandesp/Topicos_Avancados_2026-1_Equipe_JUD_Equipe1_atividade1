@@ -1,0 +1,823 @@
+
+    <html>
+    <head>
+        <style>
+            body { font-family: sans-serif; line-height: 1.6; color: #333; margin: 20px; background-color: #f8f8f8; }
+            .container { max-width: 800px; margin: auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+            h1 { color: #0056b3; border-bottom: 2px solid #0056b3; padding-bottom: 10px; margin-bottom: 20px; text-align: center; }
+            h2 { color: #0056b3; margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+            ul { list-style-type: disc; margin-left: 20px; padding-left: 0; }
+            li { margin-bottom: 10px; }
+            strong { color: #0056b3; }
+            .accuracy-box { background-color: #e6f7ff; border: 1px solid #b3e0ff; padding: 15px; border-radius: 5px; text-align: center; margin-top: 20px; font-size: 1.2em; }
+            .accuracy-value { font-size: 1.8em; font-weight: bold; color: #007bff; }
+            .plot-container { text-align: center; margin-top: 20px; }
+            .plot-container img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px; padding: 5px; background: #fff; }
+            .info-block { background-color: #f0f8ff; border: 1px solid #cceeff; padding: 15px; border-radius: 5px; margin-top: 20px; margin-bottom: 20px; font-size: 0.95em; line-height: 1.5; }
+            .info-block p { margin: 5px 0; }
+            /* Table Styling */
+            .dataframe { border-collapse: collapse; margin-top: 20px; }
+            .dataframe th, .dataframe td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            .dataframe tbody tr:nth-child(odd) { background-color: #ffffff; } /* White for odd rows */
+            .dataframe tbody tr:nth-child(even) { background-color: #f9f9f9; } /* Light gray for even rows */
+            .dataframe tr:hover { background-color: #f1f1f1; }
+            .dataframe th:first-child, .dataframe td:first-child { display: none; } /* Hide the first column */
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Avaliação de respostas de questões de multipla escolha da OAB por um modelo de IA</h1>
+
+            <div class="info-block">
+                <p><strong>Aluno:</strong> Eduardo Henrique</p>
+                <p><strong>Data de realização de teste:</strong> 06/04/2026</p>
+                <p><strong>Código fonte:</strong> <a href="https://github.com/eduoududu/juridico" target="_blank">https://github.com/eduoududu/juridico</a></p>
+            </div>
+
+            <h2>Etapas Realizadas:</h2>
+            <ul>
+                <li><strong>Importação do Conjunto de Dados:</strong> O projeto iniciou com a importação de um conjunto de dados do Hugging Face.</li>
+                <li><strong>Fonte dos Dados:</strong> Os dados foram obtidos de <code>eduagarcia/oab_exams</code>, que consiste em um conjunto de provas de múltipla escolha da OAB, incluindo perguntas, opções de resposta (A, B, C, D) e o gabarito oficial de cada questão.</li>
+                <li><strong>Seleção de Subconjunto:</strong> Foi selecionado um subconjunto específico de 106 questões, abrangendo do número 319 ao 424, para a realização da análise.</li>
+                <li><strong>Submissão à IA:</strong> O subconjunto de 106 questões foi submetido ao modelo de LLM <strong>llama-3.3-70b-versatile</strong> (um modelo Llama 3 de 70 bilhões de parâmetros). A temperatura do modelo foi configurada para 0.1, visando um comportamento mais conservador e respostas menos criativas.</li>
+                <li><strong>Armazenamento e Comparação:</strong> As respostas geradas pela IA foram armazenadas no mesmo DataFrame que contém as perguntas, opções e gabarito. Em seguida, essas respostas foram comparadas com o gabarito para calcular a taxa de acerto do modelo.</li>
+            </ul>
+
+            <h2>Resultados Encontrados:</h2>
+            <div class="accuracy-box">
+                <p>O percentual de acertos da IA para o subconjunto de questões analisado foi de:</p>
+                <p class="accuracy-value">58.49%</p>
+            </div>
+            <div class="plot-container">
+                <h3>Gráfico de Acurácia Geral</h3>
+                <img src="data:image/png;base64,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b948mzGaNGmSpdauXbsa5cuXt26fOHHCkGR4e3sbSUlJ1vaVK1cakoyvvvrK2nb37/xOd//ubt68aVSrVs1o1qyZtW3q1KmGJOP8+fPZjnH3z2+ve/336va+l19+OUv7119/bUgy1qxZYxiGYcTExFg/j3r16hmLFi0yZs6cafj6+hoPPfSQcebMmSxjPP3000bVqlXtrhcwDMPglApgp2+++UYODg4aMGCATfvQoUNlGIa+/fbbvx3D1dXV+u/09HRdvHhRlSpVUokSJe65muBeMjIytHbtWrVp00blypWztletWlVhYWE2fZcvX67MzEw9//zzunDhgvXl5+enwMBArV+/PkfHDA0NlY+Pj8qWLauIiAi5u7vryy+/1MMPP2z3MZydndW9e3ebtjVr1sjR0VGvvPKKta1IkSLq16+fXZ9Ndjp27KiHHnrIuv3kk09Kko4fP56j99/5u7t06ZJSUlL05JNP2vzebs/grFy5UpmZmfcc68cff8zV2Q1Jun79upydnbO0u7i4WPdL0pUrVyT9edooNjZWnTt3Vp8+fbRixQpdunTJelrpTg899JAuXLiQq/Xin4NTKoCdTp06JX9/fxUvXtym/faqlVOnTv3tGNevX9ekSZM0b948nT592uZLJyUlxa56zp8/r+vXr9usPritSpUq+uabb6zbR48elWEY2faVJEdHxxwdc8aMGapcubKKFi0qX19fValSxTqFb+8xHn74YTk5Odm0nTp1SqVLl85yaqlSpUo5qu+v3BnKJFnDx6VLl3L0/tWrV2v8+PHavXu3zTUPd15f0bFjR/3nP/9Rz549NXLkSDVv3lzt2rVT+/bts5zqyG2urq7ZXotx48YN6/47//PZZ5+1uQi1fv36CggI0M8//5xlDMMwuK8L7huBA8gD/fv317x58zRo0CCFhITI09NTFotFERERf/kX8YPKzMyUxWLRt99+KwcHhyz7/2r1w53q1atnXaXyoMe4c8bgflgslmxnCTIyMrLtn11NknI007Bx40a1bt1ajRs31syZM1W6dGk5Ojpq3rx5Nqs/XF1d9dNPP2n9+vX6+uuvtWbNGn322Wdq1qyZvvvuu3vWkBtKly6d7bLZ223+/v42/5nddT6lSpXKNoBdunRJJUuWzM1y8Q9C4ADsVL58eX3//fe6fPmyzSzH7dUG5cuXt7bd66/B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AOSuQvEsFQD/O3PnztWtW7dsLhI1DEPOzs764IMP5Orq+pfvt1gs1tMvt6Wnp2fpd/cKlOjoaH366af67LPPVKNGDbm7u6tjx45KS0uTpL897t2WLFmi1157TVOmTFFISIiKFy+ud999V1u3brVrHAA5wwwHgBy7deuWFi5cqClTpmj37t3W1549e+Tv76///ve/qlGjhmJjY+85ho+Pj86ePWvdPnr0qK5du/a3x96yZYv+/e9/q0GDBnJ3d9etW7e0bds26/7AwEC5urr+5bHvtHnzZjVo0EB9+/bV448/rkqVKun333/P0XsB2I8ZDgA5tnr1al26dEk9evSQp6enzb7w8HDNnTtX7777rpo3b66KFSsqIiJCt27d0jfffKMRI0ZIkpo1a6YPPvhAISEhysjI0IgRI3K05LVKlSpasmSJNm3aJC8vL0VHRyspKcm638XFRSNGjNDw4cPl5OSkhg0b6vz589q/f7969OiRZbzAwEAtXLhQa9euVUBAgD755BNt27ZNAQEBD/gpAcgOMxwAcmzu3LkKDQ3NEjakPwPH9u3b5eXlpaVLl2rVqlWqVauWmjVrZrOSZMqUKSpbtqyefPJJde7cWa+99pqKFSv2t8ceNWqUgoOD1aJFCzVt2lTlypVTmzZtbPqMHj1aQ4cO1ZgxY1S1alV17NhR586dy3a83r17q127durYsaOCg4N18eJF9e3b174PBECOceMvAABgOmY4AACA6QgcAADAdAQOAABgOgIHAAAwHYEDAACYjsABAABMR+AAAACmI3AAAADTETgAAIDpCBwAAMB0BA4AAGA6AgcAADDd/wfJynAFd70mwgAAAABJRU5ErkJggg==" alt="Gráfico de Acurácia da IA">
+            </div>
+            <h2>Detalhes das Questões e Respostas</h2>
+            <style type="text/css">
+#T_fe028 th {
+  background-color: #ADD8E6;
+  font-weight: bold;
+}
+#T_fe028_row0_col0, #T_fe028_row0_col1, #T_fe028_row0_col2, #T_fe028_row0_col3, #T_fe028_row0_col4, #T_fe028_row1_col0, #T_fe028_row1_col1, #T_fe028_row1_col2, #T_fe028_row1_col3, #T_fe028_row1_col4, #T_fe028_row2_col0, #T_fe028_row2_col1, #T_fe028_row2_col2, #T_fe028_row2_col3, #T_fe028_row2_col4, #T_fe028_row3_col0, #T_fe028_row3_col1, #T_fe028_row3_col2, #T_fe028_row3_col3, #T_fe028_row3_col4, #T_fe028_row4_col0, #T_fe028_row4_col1, #T_fe028_row4_col2, #T_fe028_row4_col3, #T_fe028_row4_col4, #T_fe028_row5_col0, #T_fe028_row5_col1, #T_fe028_row5_col2, #T_fe028_row5_col3, #T_fe028_row5_col4, #T_fe028_row6_col0, #T_fe028_row6_col1, #T_fe028_row6_col2, #T_fe028_row6_col3, #T_fe028_row6_col4, #T_fe028_row7_col0, #T_fe028_row7_col1, #T_fe028_row7_col2, #T_fe028_row7_col3, #T_fe028_row7_col4, #T_fe028_row8_col0, #T_fe028_row8_col1, #T_fe028_row8_col2, #T_fe028_row8_col3, #T_fe028_row8_col4, #T_fe028_row9_col0, #T_fe028_row9_col1, #T_fe028_row9_col2, #T_fe028_row9_col3, #T_fe028_row9_col4, #T_fe028_row10_col0, #T_fe028_row10_col1, #T_fe028_row10_col2, #T_fe028_row10_col3, #T_fe028_row10_col4, #T_fe028_row11_col0, #T_fe028_row11_col1, #T_fe028_row11_col2, #T_fe028_row11_col3, #T_fe028_row11_col4, #T_fe028_row12_col0, #T_fe028_row12_col1, #T_fe028_row12_col2, #T_fe028_row12_col3, #T_fe028_row12_col4, #T_fe028_row13_col0, #T_fe028_row13_col1, #T_fe028_row13_col2, #T_fe028_row13_col3, #T_fe028_row13_col4, #T_fe028_row14_col0, #T_fe028_row14_col1, #T_fe028_row14_col2, #T_fe028_row14_col3, #T_fe028_row14_col4, #T_fe028_row15_col0, #T_fe028_row15_col1, #T_fe028_row15_col2, #T_fe028_row15_col3, #T_fe028_row15_col4, #T_fe028_row16_col0, #T_fe028_row16_col1, #T_fe028_row16_col2, #T_fe028_row16_col3, #T_fe028_row16_col4, #T_fe028_row17_col0, #T_fe028_row17_col1, #T_fe028_row17_col2, #T_fe028_row17_col3, #T_fe028_row17_col4, #T_fe028_row18_col0, #T_fe028_row18_col1, #T_fe028_row18_col2, #T_fe028_row18_col3, #T_fe028_row18_col4, #T_fe028_row19_col0, #T_fe028_row19_col1, #T_fe028_row19_col2, #T_fe028_row19_col3, #T_fe028_row19_col4, #T_fe028_row20_col0, #T_fe028_row20_col1, #T_fe028_row20_col2, #T_fe028_row20_col3, #T_fe028_row20_col4, #T_fe028_row21_col0, #T_fe028_row21_col1, #T_fe028_row21_col2, #T_fe028_row21_col3, #T_fe028_row21_col4, #T_fe028_row22_col0, #T_fe028_row22_col1, #T_fe028_row22_col2, #T_fe028_row22_col3, #T_fe028_row22_col4, #T_fe028_row23_col0, #T_fe028_row23_col1, #T_fe028_row23_col2, #T_fe028_row23_col3, #T_fe028_row23_col4, #T_fe028_row24_col0, #T_fe028_row24_col1, #T_fe028_row24_col2, #T_fe028_row24_col3, #T_fe028_row24_col4, #T_fe028_row25_col0, #T_fe028_row25_col1, #T_fe028_row25_col2, #T_fe028_row25_col3, #T_fe028_row25_col4, #T_fe028_row26_col0, #T_fe028_row26_col1, #T_fe028_row26_col2, #T_fe028_row26_col3, #T_fe028_row26_col4, #T_fe028_row27_col0, #T_fe028_row27_col1, #T_fe028_row27_col2, #T_fe028_row27_col3, #T_fe028_row27_col4, #T_fe028_row28_col0, #T_fe028_row28_col1, #T_fe028_row28_col2, #T_fe028_row28_col3, #T_fe028_row28_col4, #T_fe028_row29_col0, #T_fe028_row29_col1, #T_fe028_row29_col2, #T_fe028_row29_col3, #T_fe028_row29_col4, #T_fe028_row30_col0, #T_fe028_row30_col1, #T_fe028_row30_col2, #T_fe028_row30_col3, #T_fe028_row30_col4, #T_fe028_row31_col0, #T_fe028_row31_col1, #T_fe028_row31_col2, #T_fe028_row31_col3, #T_fe028_row31_col4, #T_fe028_row32_col0, #T_fe028_row32_col1, #T_fe028_row32_col2, #T_fe028_row32_col3, #T_fe028_row32_col4, #T_fe028_row33_col0, #T_fe028_row33_col1, #T_fe028_row33_col2, #T_fe028_row33_col3, #T_fe028_row33_col4, #T_fe028_row34_col0, #T_fe028_row34_col1, #T_fe028_row34_col2, #T_fe028_row34_col3, #T_fe028_row34_col4, #T_fe028_row35_col0, #T_fe028_row35_col1, #T_fe028_row35_col2, #T_fe028_row35_col3, #T_fe028_row35_col4, #T_fe028_row36_col0, #T_fe028_row36_col1, #T_fe028_row36_col2, #T_fe028_row36_col3, #T_fe028_row36_col4, #T_fe028_row37_col0, #T_fe028_row37_col1, #T_fe028_row37_col2, #T_fe028_row37_col3, #T_fe028_row37_col4, #T_fe028_row38_col0, #T_fe028_row38_col1, #T_fe028_row38_col2, #T_fe028_row38_col3, #T_fe028_row38_col4, #T_fe028_row39_col0, #T_fe028_row39_col1, #T_fe028_row39_col2, #T_fe028_row39_col3, #T_fe028_row39_col4, #T_fe028_row40_col0, #T_fe028_row40_col1, #T_fe028_row40_col2, #T_fe028_row40_col3, #T_fe028_row40_col4, #T_fe028_row41_col0, #T_fe028_row41_col1, #T_fe028_row41_col2, #T_fe028_row41_col3, #T_fe028_row41_col4, #T_fe028_row42_col0, #T_fe028_row42_col1, #T_fe028_row42_col2, #T_fe028_row42_col3, #T_fe028_row42_col4, #T_fe028_row43_col0, #T_fe028_row43_col1, #T_fe028_row43_col2, #T_fe028_row43_col3, #T_fe028_row43_col4, #T_fe028_row44_col0, #T_fe028_row44_col1, #T_fe028_row44_col2, #T_fe028_row44_col3, #T_fe028_row44_col4, #T_fe028_row45_col0, #T_fe028_row45_col1, #T_fe028_row45_col2, #T_fe028_row45_col3, #T_fe028_row45_col4, #T_fe028_row46_col0, #T_fe028_row46_col1, #T_fe028_row46_col2, #T_fe028_row46_col3, #T_fe028_row46_col4, #T_fe028_row47_col0, #T_fe028_row47_col1, #T_fe028_row47_col2, #T_fe028_row47_col3, #T_fe028_row47_col4, #T_fe028_row48_col0, #T_fe028_row48_col1, #T_fe028_row48_col2, #T_fe028_row48_col3, #T_fe028_row48_col4, #T_fe028_row49_col0, #T_fe028_row49_col1, #T_fe028_row49_col2, #T_fe028_row49_col3, #T_fe028_row49_col4, #T_fe028_row50_col0, #T_fe028_row50_col1, #T_fe028_row50_col2, #T_fe028_row50_col3, #T_fe028_row50_col4, #T_fe028_row51_col0, #T_fe028_row51_col1, #T_fe028_row51_col2, #T_fe028_row51_col3, #T_fe028_row51_col4, #T_fe028_row52_col0, #T_fe028_row52_col1, #T_fe028_row52_col2, #T_fe028_row52_col3, #T_fe028_row52_col4, #T_fe028_row53_col0, #T_fe028_row53_col1, #T_fe028_row53_col2, #T_fe028_row53_col3, #T_fe028_row53_col4, #T_fe028_row54_col0, #T_fe028_row54_col1, #T_fe028_row54_col2, #T_fe028_row54_col3, #T_fe028_row54_col4, #T_fe028_row55_col0, #T_fe028_row55_col1, #T_fe028_row55_col2, #T_fe028_row55_col3, #T_fe028_row55_col4, #T_fe028_row56_col0, #T_fe028_row56_col1, #T_fe028_row56_col2, #T_fe028_row56_col3, #T_fe028_row56_col4, #T_fe028_row57_col0, #T_fe028_row57_col1, #T_fe028_row57_col2, #T_fe028_row57_col3, #T_fe028_row57_col4, #T_fe028_row58_col0, #T_fe028_row58_col1, #T_fe028_row58_col2, #T_fe028_row58_col3, #T_fe028_row58_col4, #T_fe028_row59_col0, #T_fe028_row59_col1, #T_fe028_row59_col2, #T_fe028_row59_col3, #T_fe028_row59_col4, #T_fe028_row60_col0, #T_fe028_row60_col1, #T_fe028_row60_col2, #T_fe028_row60_col3, #T_fe028_row60_col4, #T_fe028_row61_col0, #T_fe028_row61_col1, #T_fe028_row61_col2, #T_fe028_row61_col3, #T_fe028_row61_col4, #T_fe028_row62_col0, #T_fe028_row62_col1, #T_fe028_row62_col2, #T_fe028_row62_col3, #T_fe028_row62_col4, #T_fe028_row63_col0, #T_fe028_row63_col1, #T_fe028_row63_col2, #T_fe028_row63_col3, #T_fe028_row63_col4, #T_fe028_row64_col0, #T_fe028_row64_col1, #T_fe028_row64_col2, #T_fe028_row64_col3, #T_fe028_row64_col4, #T_fe028_row65_col0, #T_fe028_row65_col1, #T_fe028_row65_col2, #T_fe028_row65_col3, #T_fe028_row65_col4, #T_fe028_row66_col0, #T_fe028_row66_col1, #T_fe028_row66_col2, #T_fe028_row66_col3, #T_fe028_row66_col4, #T_fe028_row67_col0, #T_fe028_row67_col1, #T_fe028_row67_col2, #T_fe028_row67_col3, #T_fe028_row67_col4, #T_fe028_row68_col0, #T_fe028_row68_col1, #T_fe028_row68_col2, #T_fe028_row68_col3, #T_fe028_row68_col4, #T_fe028_row69_col0, #T_fe028_row69_col1, #T_fe028_row69_col2, #T_fe028_row69_col3, #T_fe028_row69_col4, #T_fe028_row70_col0, #T_fe028_row70_col1, #T_fe028_row70_col2, #T_fe028_row70_col3, #T_fe028_row70_col4, #T_fe028_row71_col0, #T_fe028_row71_col1, #T_fe028_row71_col2, #T_fe028_row71_col3, #T_fe028_row71_col4, #T_fe028_row72_col0, #T_fe028_row72_col1, #T_fe028_row72_col2, #T_fe028_row72_col3, #T_fe028_row72_col4, #T_fe028_row73_col0, #T_fe028_row73_col1, #T_fe028_row73_col2, #T_fe028_row73_col3, #T_fe028_row73_col4, #T_fe028_row74_col0, #T_fe028_row74_col1, #T_fe028_row74_col2, #T_fe028_row74_col3, #T_fe028_row74_col4, #T_fe028_row75_col0, #T_fe028_row75_col1, #T_fe028_row75_col2, #T_fe028_row75_col3, #T_fe028_row75_col4, #T_fe028_row76_col0, #T_fe028_row76_col1, #T_fe028_row76_col2, #T_fe028_row76_col3, #T_fe028_row76_col4, #T_fe028_row77_col0, #T_fe028_row77_col1, #T_fe028_row77_col2, #T_fe028_row77_col3, #T_fe028_row77_col4, #T_fe028_row78_col0, #T_fe028_row78_col1, #T_fe028_row78_col2, #T_fe028_row78_col3, #T_fe028_row78_col4, #T_fe028_row79_col0, #T_fe028_row79_col1, #T_fe028_row79_col2, #T_fe028_row79_col3, #T_fe028_row79_col4, #T_fe028_row80_col0, #T_fe028_row80_col1, #T_fe028_row80_col2, #T_fe028_row80_col3, #T_fe028_row80_col4, #T_fe028_row81_col0, #T_fe028_row81_col1, #T_fe028_row81_col2, #T_fe028_row81_col3, #T_fe028_row81_col4, #T_fe028_row82_col0, #T_fe028_row82_col1, #T_fe028_row82_col2, #T_fe028_row82_col3, #T_fe028_row82_col4, #T_fe028_row83_col0, #T_fe028_row83_col1, #T_fe028_row83_col2, #T_fe028_row83_col3, #T_fe028_row83_col4, #T_fe028_row84_col0, #T_fe028_row84_col1, #T_fe028_row84_col2, #T_fe028_row84_col3, #T_fe028_row84_col4, #T_fe028_row85_col0, #T_fe028_row85_col1, #T_fe028_row85_col2, #T_fe028_row85_col3, #T_fe028_row85_col4, #T_fe028_row86_col0, #T_fe028_row86_col1, #T_fe028_row86_col2, #T_fe028_row86_col3, #T_fe028_row86_col4, #T_fe028_row87_col0, #T_fe028_row87_col1, #T_fe028_row87_col2, #T_fe028_row87_col3, #T_fe028_row87_col4, #T_fe028_row88_col0, #T_fe028_row88_col1, #T_fe028_row88_col2, #T_fe028_row88_col3, #T_fe028_row88_col4, #T_fe028_row89_col0, #T_fe028_row89_col1, #T_fe028_row89_col2, #T_fe028_row89_col3, #T_fe028_row89_col4, #T_fe028_row90_col0, #T_fe028_row90_col1, #T_fe028_row90_col2, #T_fe028_row90_col3, #T_fe028_row90_col4, #T_fe028_row91_col0, #T_fe028_row91_col1, #T_fe028_row91_col2, #T_fe028_row91_col3, #T_fe028_row91_col4, #T_fe028_row92_col0, #T_fe028_row92_col1, #T_fe028_row92_col2, #T_fe028_row92_col3, #T_fe028_row92_col4, #T_fe028_row93_col0, #T_fe028_row93_col1, #T_fe028_row93_col2, #T_fe028_row93_col3, #T_fe028_row93_col4, #T_fe028_row94_col0, #T_fe028_row94_col1, #T_fe028_row94_col2, #T_fe028_row94_col3, #T_fe028_row94_col4, #T_fe028_row95_col0, #T_fe028_row95_col1, #T_fe028_row95_col2, #T_fe028_row95_col3, #T_fe028_row95_col4, #T_fe028_row96_col0, #T_fe028_row96_col1, #T_fe028_row96_col2, #T_fe028_row96_col3, #T_fe028_row96_col4, #T_fe028_row97_col0, #T_fe028_row97_col1, #T_fe028_row97_col2, #T_fe028_row97_col3, #T_fe028_row97_col4, #T_fe028_row98_col0, #T_fe028_row98_col1, #T_fe028_row98_col2, #T_fe028_row98_col3, #T_fe028_row98_col4, #T_fe028_row99_col0, #T_fe028_row99_col1, #T_fe028_row99_col2, #T_fe028_row99_col3, #T_fe028_row99_col4, #T_fe028_row100_col0, #T_fe028_row100_col1, #T_fe028_row100_col2, #T_fe028_row100_col3, #T_fe028_row100_col4, #T_fe028_row101_col0, #T_fe028_row101_col1, #T_fe028_row101_col2, #T_fe028_row101_col3, #T_fe028_row101_col4, #T_fe028_row102_col0, #T_fe028_row102_col1, #T_fe028_row102_col2, #T_fe028_row102_col3, #T_fe028_row102_col4, #T_fe028_row103_col0, #T_fe028_row103_col1, #T_fe028_row103_col2, #T_fe028_row103_col3, #T_fe028_row103_col4, #T_fe028_row104_col0, #T_fe028_row104_col1, #T_fe028_row104_col2, #T_fe028_row104_col3, #T_fe028_row104_col4, #T_fe028_row105_col0, #T_fe028_row105_col1, #T_fe028_row105_col2, #T_fe028_row105_col3, #T_fe028_row105_col4 {
+  text-align: left;
+}
+</style>
+<table id="T_fe028">
+  <thead>
+    <tr>
+      <th id="T_fe028_level0_col0" class="col_heading level0 col0" >Questão</th>
+      <th id="T_fe028_level0_col1" class="col_heading level0 col1" >Enunciado</th>
+      <th id="T_fe028_level0_col2" class="col_heading level0 col2" >Gabarito</th>
+      <th id="T_fe028_level0_col3" class="col_heading level0 col3" >IA</th>
+      <th id="T_fe028_level0_col4" class="col_heading level0 col4" >Situação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_fe028_row0_col0" class="data row0 col0" >319</td>
+      <td id="T_fe028_row0_col1" class="data row0 col1" >Em relação ao controle de constitucional ...</td>
+      <td id="T_fe028_row0_col2" class="data row0 col2" >C</td>
+      <td id="T_fe028_row0_col3" class="data row0 col3" >C</td>
+      <td id="T_fe028_row0_col4" class="data row0 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row1_col0" class="data row1 col0" >320</td>
+      <td id="T_fe028_row1_col1" class="data row1 col1" >As alternativas a seguir apontam diferen ...</td>
+      <td id="T_fe028_row1_col2" class="data row1 col2" >A</td>
+      <td id="T_fe028_row1_col3" class="data row1 col3" >C</td>
+      <td id="T_fe028_row1_col4" class="data row1 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row2_col0" class="data row2 col0" >321</td>
+      <td id="T_fe028_row2_col1" class="data row2 col1" >A respeito da distribuição de competênci ...</td>
+      <td id="T_fe028_row2_col2" class="data row2 col2" >B</td>
+      <td id="T_fe028_row2_col3" class="data row2 col3" >A</td>
+      <td id="T_fe028_row2_col4" class="data row2 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row3_col0" class="data row3 col0" >322</td>
+      <td id="T_fe028_row3_col1" class="data row3 col1" >Os direitos políticos não podem ser cass ...</td>
+      <td id="T_fe028_row3_col2" class="data row3 col2" >D</td>
+      <td id="T_fe028_row3_col3" class="data row3 col3" >B</td>
+      <td id="T_fe028_row3_col4" class="data row3 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row4_col0" class="data row4 col0" >323</td>
+      <td id="T_fe028_row4_col1" class="data row4 col1" >Considere a hipótese de Deputado Federal ...</td>
+      <td id="T_fe028_row4_col2" class="data row4 col2" >A</td>
+      <td id="T_fe028_row4_col3" class="data row4 col3" >B</td>
+      <td id="T_fe028_row4_col4" class="data row4 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row5_col0" class="data row5 col0" >324</td>
+      <td id="T_fe028_row5_col1" class="data row5 col1" >Washington, adolescente com 14 (quatorze ...</td>
+      <td id="T_fe028_row5_col2" class="data row5 col2" >C</td>
+      <td id="T_fe028_row5_col3" class="data row5 col3" >C</td>
+      <td id="T_fe028_row5_col4" class="data row5 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row6_col0" class="data row6 col0" >325</td>
+      <td id="T_fe028_row6_col1" class="data row6 col1" >No tocante às normas contidas no Estatut ...</td>
+      <td id="T_fe028_row6_col2" class="data row6 col2" >A</td>
+      <td id="T_fe028_row6_col3" class="data row6 col3" >B</td>
+      <td id="T_fe028_row6_col4" class="data row6 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row7_col0" class="data row7 col0" >326</td>
+      <td id="T_fe028_row7_col1" class="data row7 col1" >Em âmbito federal, o direito de a Admini ...</td>
+      <td id="T_fe028_row7_col2" class="data row7 col2" >D</td>
+      <td id="T_fe028_row7_col3" class="data row7 col3" >B</td>
+      <td id="T_fe028_row7_col4" class="data row7 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row8_col0" class="data row8 col0" >327</td>
+      <td id="T_fe028_row8_col1" class="data row8 col1" >A qualificação como Organizações da Soci ...</td>
+      <td id="T_fe028_row8_col2" class="data row8 col2" >A</td>
+      <td id="T_fe028_row8_col3" class="data row8 col3" >A</td>
+      <td id="T_fe028_row8_col4" class="data row8 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row9_col0" class="data row9 col0" >328</td>
+      <td id="T_fe028_row9_col1" class="data row9 col1" >O contrato de prestação de serviços de q ...</td>
+      <td id="T_fe028_row9_col2" class="data row9 col2" >C</td>
+      <td id="T_fe028_row9_col3" class="data row9 col3" >C</td>
+      <td id="T_fe028_row9_col4" class="data row9 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row10_col0" class="data row10 col0" >329</td>
+      <td id="T_fe028_row10_col1" class="data row10 col1" >Ao tomar conhecimento de que o serviço p ...</td>
+      <td id="T_fe028_row10_col2" class="data row10 col2" >B</td>
+      <td id="T_fe028_row10_col3" class="data row10 col3" >B</td>
+      <td id="T_fe028_row10_col4" class="data row10 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row11_col0" class="data row11 col0" >330</td>
+      <td id="T_fe028_row11_col1" class="data row11 col1" >A Lei 11.107, de 6 de abril de 2005, dis ...</td>
+      <td id="T_fe028_row11_col2" class="data row11 col2" >D</td>
+      <td id="T_fe028_row11_col3" class="data row11 col3" >Nenhuma das alternativas está correta de acordo com a Lei 11.107/2005.</td>
+      <td id="T_fe028_row11_col4" class="data row11 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row12_col0" class="data row12 col0" >331</td>
+      <td id="T_fe028_row12_col1" class="data row12 col1" >Antônio, vítima em acidente automobilíst ...</td>
+      <td id="T_fe028_row12_col2" class="data row12 col2" >B</td>
+      <td id="T_fe028_row12_col3" class="data row12 col3" >B</td>
+      <td id="T_fe028_row12_col4" class="data row12 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row13_col0" class="data row13 col0" >332</td>
+      <td id="T_fe028_row13_col1" class="data row13 col1" >Noêmia, proprietária de uma casa litorân ...</td>
+      <td id="T_fe028_row13_col2" class="data row13 col2" >B</td>
+      <td id="T_fe028_row13_col3" class="data row13 col3" >B</td>
+      <td id="T_fe028_row13_col4" class="data row13 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row14_col0" class="data row14 col0" >333</td>
+      <td id="T_fe028_row14_col1" class="data row14 col1" >Jonas, maior e capaz, confiou em depósit ...</td>
+      <td id="T_fe028_row14_col2" class="data row14 col2" >C</td>
+      <td id="T_fe028_row14_col3" class="data row14 col3" >B</td>
+      <td id="T_fe028_row14_col4" class="data row14 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row15_col0" class="data row15 col0" >334</td>
+      <td id="T_fe028_row15_col1" class="data row15 col1" >Rodolfo, brasileiro, engenheiro, solteir ...</td>
+      <td id="T_fe028_row15_col2" class="data row15 col2" >C</td>
+      <td id="T_fe028_row15_col3" class="data row15 col3" >B</td>
+      <td id="T_fe028_row15_col4" class="data row15 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row16_col0" class="data row16 col0" >335</td>
+      <td id="T_fe028_row16_col1" class="data row16 col1" >O negócio jurídico depende da regular ma ...</td>
+      <td id="T_fe028_row16_col2" class="data row16 col2" >B</td>
+      <td id="T_fe028_row16_col3" class="data row16 col3" >B</td>
+      <td id="T_fe028_row16_col4" class="data row16 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row17_col0" class="data row17 col0" >336</td>
+      <td id="T_fe028_row17_col1" class="data row17 col1" >Gustavo tornou-se fiador do seu amigo He ...</td>
+      <td id="T_fe028_row17_col2" class="data row17 col2" >D</td>
+      <td id="T_fe028_row17_col3" class="data row17 col3" >C</td>
+      <td id="T_fe028_row17_col4" class="data row17 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row18_col0" class="data row18 col0" >337</td>
+      <td id="T_fe028_row18_col1" class="data row18 col1" >Acerca da servidão de aqueduto, assinale ...</td>
+      <td id="T_fe028_row18_col2" class="data row18 col2" >D</td>
+      <td id="T_fe028_row18_col3" class="data row18 col3" >D</td>
+      <td id="T_fe028_row18_col4" class="data row18 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row19_col0" class="data row19 col0" >338</td>
+      <td id="T_fe028_row19_col1" class="data row19 col1" >Suponha que tenha sido publicada no Diár ...</td>
+      <td id="T_fe028_row19_col2" class="data row19 col2" >B</td>
+      <td id="T_fe028_row19_col3" class="data row19 col3" >A</td>
+      <td id="T_fe028_row19_col4" class="data row19 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row20_col0" class="data row20 col0" >339</td>
+      <td id="T_fe028_row20_col1" class="data row20 col1" >Quando a sentença que reconhece obrigaçã ...</td>
+      <td id="T_fe028_row20_col2" class="data row20 col2" >B</td>
+      <td id="T_fe028_row20_col3" class="data row20 col3" >B</td>
+      <td id="T_fe028_row20_col4" class="data row20 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row21_col0" class="data row21 col0" >340</td>
+      <td id="T_fe028_row21_col1" class="data row21 col1" >Júlia ingressou com ação de indenização  ...</td>
+      <td id="T_fe028_row21_col2" class="data row21 col2" >C</td>
+      <td id="T_fe028_row21_col3" class="data row21 col3" >C</td>
+      <td id="T_fe028_row21_col4" class="data row21 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row22_col0" class="data row22 col0" >341</td>
+      <td id="T_fe028_row22_col1" class="data row22 col1" >No âmbito do Direito Processual Civil, o ...</td>
+      <td id="T_fe028_row22_col2" class="data row22 col2" >A</td>
+      <td id="T_fe028_row22_col3" class="data row22 col3" >B</td>
+      <td id="T_fe028_row22_col4" class="data row22 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row23_col0" class="data row23 col0" >342</td>
+      <td id="T_fe028_row23_col1" class="data row23 col1" >O rito comum sumário tem suas hipóteses  ...</td>
+      <td id="T_fe028_row23_col2" class="data row23 col2" >A</td>
+      <td id="T_fe028_row23_col3" class="data row23 col3" >A</td>
+      <td id="T_fe028_row23_col4" class="data row23 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row24_col0" class="data row24 col0" >343</td>
+      <td id="T_fe028_row24_col1" class="data row24 col1" >Em uma ação fundada na responsabilidade  ...</td>
+      <td id="T_fe028_row24_col2" class="data row24 col2" >C</td>
+      <td id="T_fe028_row24_col3" class="data row24 col3" >A</td>
+      <td id="T_fe028_row24_col4" class="data row24 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row25_col0" class="data row25 col0" >344</td>
+      <td id="T_fe028_row25_col1" class="data row25 col1" >A respeito das ações possessórias, assin ...</td>
+      <td id="T_fe028_row25_col2" class="data row25 col2" >B</td>
+      <td id="T_fe028_row25_col3" class="data row25 col3" >D</td>
+      <td id="T_fe028_row25_col4" class="data row25 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row26_col0" class="data row26 col0" >345</td>
+      <td id="T_fe028_row26_col1" class="data row26 col1" >No âmbito do Código de Defesa do Consumi ...</td>
+      <td id="T_fe028_row26_col2" class="data row26 col2" >D</td>
+      <td id="T_fe028_row26_col3" class="data row26 col3" >B</td>
+      <td id="T_fe028_row26_col4" class="data row26 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row27_col0" class="data row27 col0" >346</td>
+      <td id="T_fe028_row27_col1" class="data row27 col1" >Analisando o artigo 6º, V, do Código de  ...</td>
+      <td id="T_fe028_row27_col2" class="data row27 col2" >C</td>
+      <td id="T_fe028_row27_col3" class="data row27 col3" >C</td>
+      <td id="T_fe028_row27_col4" class="data row27 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row28_col0" class="data row28 col0" >347</td>
+      <td id="T_fe028_row28_col1" class="data row28 col1" >Contrato oneroso, em que alguém assume,  ...</td>
+      <td id="T_fe028_row28_col2" class="data row28 col2" >A</td>
+      <td id="T_fe028_row28_col3" class="data row28 col3" >C</td>
+      <td id="T_fe028_row28_col4" class="data row28 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row29_col0" class="data row29 col0" >348</td>
+      <td id="T_fe028_row29_col1" class="data row29 col1" >É uma cláusula acessória ao contrato de  ...</td>
+      <td id="T_fe028_row29_col2" class="data row29 col2" >A</td>
+      <td id="T_fe028_row29_col3" class="data row29 col3" >A</td>
+      <td id="T_fe028_row29_col4" class="data row29 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row30_col0" class="data row30 col0" >349</td>
+      <td id="T_fe028_row30_col1" class="data row30 col1" >Em relação ao Direito Cambiário, é corre ...</td>
+      <td id="T_fe028_row30_col2" class="data row30 col2" >D</td>
+      <td id="T_fe028_row30_col3" class="data row30 col3" >C</td>
+      <td id="T_fe028_row30_col4" class="data row30 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row31_col0" class="data row31 col0" >350</td>
+      <td id="T_fe028_row31_col1" class="data row31 col1" >Em relação à modificação do capital soci ...</td>
+      <td id="T_fe028_row31_col2" class="data row31 col2" >C</td>
+      <td id="T_fe028_row31_col3" class="data row31 col3" >B</td>
+      <td id="T_fe028_row31_col4" class="data row31 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row32_col0" class="data row32 col0" >351</td>
+      <td id="T_fe028_row32_col1" class="data row32 col1" >A sociedade empresária XYZ Computação Gr ...</td>
+      <td id="T_fe028_row32_col2" class="data row32 col2" >D</td>
+      <td id="T_fe028_row32_col3" class="data row32 col3" >D</td>
+      <td id="T_fe028_row32_col4" class="data row32 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row33_col0" class="data row33 col0" >352</td>
+      <td id="T_fe028_row33_col1" class="data row33 col1" >A Empresa ABC Ltda. foi incorporada pela ...</td>
+      <td id="T_fe028_row33_col2" class="data row33 col2" >A</td>
+      <td id="T_fe028_row33_col3" class="data row33 col3" >A</td>
+      <td id="T_fe028_row33_col4" class="data row33 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row34_col0" class="data row34 col0" >353</td>
+      <td id="T_fe028_row34_col1" class="data row34 col1" >O Imposto sobre Operações Relativas à Ci ...</td>
+      <td id="T_fe028_row34_col2" class="data row34 col2" >B</td>
+      <td id="T_fe028_row34_col3" class="data row34 col3" >B</td>
+      <td id="T_fe028_row34_col4" class="data row34 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row35_col0" class="data row35 col0" >354</td>
+      <td id="T_fe028_row35_col1" class="data row35 col1" >José dos Anjos ajuíza ação anulatória de ...</td>
+      <td id="T_fe028_row35_col2" class="data row35 col2" >C</td>
+      <td id="T_fe028_row35_col3" class="data row35 col3" >C</td>
+      <td id="T_fe028_row35_col4" class="data row35 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row36_col0" class="data row36 col0" >355</td>
+      <td id="T_fe028_row36_col1" class="data row36 col1" >A redação da Súmula Vinculante 28 ("É in ...</td>
+      <td id="T_fe028_row36_col2" class="data row36 col2" >C</td>
+      <td id="T_fe028_row36_col3" class="data row36 col3" >C</td>
+      <td id="T_fe028_row36_col4" class="data row36 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row37_col0" class="data row37 col0" >356</td>
+      <td id="T_fe028_row37_col1" class="data row37 col1" >O inciso VII do §1º do art. 225 da Const ...</td>
+      <td id="T_fe028_row37_col2" class="data row37 col2" >C</td>
+      <td id="T_fe028_row37_col3" class="data row37 col3" >D</td>
+      <td id="T_fe028_row37_col4" class="data row37 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row38_col0" class="data row38 col0" >357</td>
+      <td id="T_fe028_row38_col1" class="data row38 col1" >Assinale a alternativa correta quanto ao ...</td>
+      <td id="T_fe028_row38_col2" class="data row38 col2" >D</td>
+      <td id="T_fe028_row38_col3" class="data row38 col3" >D</td>
+      <td id="T_fe028_row38_col4" class="data row38 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row39_col0" class="data row39 col0" >358</td>
+      <td id="T_fe028_row39_col1" class="data row39 col1" >Com relação aos critérios para substitui ...</td>
+      <td id="T_fe028_row39_col2" class="data row39 col2" >D</td>
+      <td id="T_fe028_row39_col3" class="data row39 col3" >D</td>
+      <td id="T_fe028_row39_col4" class="data row39 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row40_col0" class="data row40 col0" >359</td>
+      <td id="T_fe028_row40_col1" class="data row40 col1" >À luz da lei que dispõe sobre os Juizado ...</td>
+      <td id="T_fe028_row40_col2" class="data row40 col2" >D</td>
+      <td id="T_fe028_row40_col3" class="data row40 col3" >D</td>
+      <td id="T_fe028_row40_col4" class="data row40 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row41_col0" class="data row41 col0" >360</td>
+      <td id="T_fe028_row41_col1" class="data row41 col1" >Tício praticou um crime de furto (art. 1 ...</td>
+      <td id="T_fe028_row41_col2" class="data row41 col2" >B</td>
+      <td id="T_fe028_row41_col3" class="data row41 col3" >D</td>
+      <td id="T_fe028_row41_col4" class="data row41 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row42_col0" class="data row42 col0" >361</td>
+      <td id="T_fe028_row42_col1" class="data row42 col1" >Osíris, jovem universitária de Medicina, ...</td>
+      <td id="T_fe028_row42_col2" class="data row42 col2" >D</td>
+      <td id="T_fe028_row42_col3" class="data row42 col3" >A</td>
+      <td id="T_fe028_row42_col4" class="data row42 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row43_col0" class="data row43 col0" >362</td>
+      <td id="T_fe028_row43_col1" class="data row43 col1" >Em relação ao cálculo da pena, é correto ...</td>
+      <td id="T_fe028_row43_col2" class="data row43 col2" >B</td>
+      <td id="T_fe028_row43_col3" class="data row43 col3" >D</td>
+      <td id="T_fe028_row43_col4" class="data row43 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row44_col0" class="data row44 col0" >363</td>
+      <td id="T_fe028_row44_col1" class="data row44 col1" >Configura modalidade de peculato previst ...</td>
+      <td id="T_fe028_row44_col2" class="data row44 col2" >B</td>
+      <td id="T_fe028_row44_col3" class="data row44 col3" >A</td>
+      <td id="T_fe028_row44_col4" class="data row44 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row45_col0" class="data row45 col0" >364</td>
+      <td id="T_fe028_row45_col1" class="data row45 col1" >Levando em consideração as modificações  ...</td>
+      <td id="T_fe028_row45_col2" class="data row45 col2" >A</td>
+      <td id="T_fe028_row45_col3" class="data row45 col3" >C</td>
+      <td id="T_fe028_row45_col4" class="data row45 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row46_col0" class="data row46 col0" >365</td>
+      <td id="T_fe028_row46_col1" class="data row46 col1" >A Lei 7.492/86 define os Crimes contra o ...</td>
+      <td id="T_fe028_row46_col2" class="data row46 col2" >A</td>
+      <td id="T_fe028_row46_col3" class="data row46 col3" >A</td>
+      <td id="T_fe028_row46_col4" class="data row46 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row47_col0" class="data row47 col0" >366</td>
+      <td id="T_fe028_row47_col1" class="data row47 col1" >Em relação ao incidente de falsidade, é  ...</td>
+      <td id="T_fe028_row47_col2" class="data row47 col2" >A</td>
+      <td id="T_fe028_row47_col3" class="data row47 col3" >A</td>
+      <td id="T_fe028_row47_col4" class="data row47 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row48_col0" class="data row48 col0" >367</td>
+      <td id="T_fe028_row48_col1" class="data row48 col1" >Em relação às exceções previstas na legi ...</td>
+      <td id="T_fe028_row48_col2" class="data row48 col2" >D</td>
+      <td id="T_fe028_row48_col3" class="data row48 col3" >D</td>
+      <td id="T_fe028_row48_col4" class="data row48 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row49_col0" class="data row49 col0" >368</td>
+      <td id="T_fe028_row49_col1" class="data row49 col1" >Acerca das disposições contidas na Lei P ...</td>
+      <td id="T_fe028_row49_col2" class="data row49 col2" >C</td>
+      <td id="T_fe028_row49_col3" class="data row49 col3" >C</td>
+      <td id="T_fe028_row49_col4" class="data row49 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row50_col0" class="data row50 col0" >369</td>
+      <td id="T_fe028_row50_col1" class="data row50 col1" >João da Silva ajuizou reclamação trabalh ...</td>
+      <td id="T_fe028_row50_col2" class="data row50 col2" >B</td>
+      <td id="T_fe028_row50_col3" class="data row50 col3" >D</td>
+      <td id="T_fe028_row50_col4" class="data row50 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row51_col0" class="data row51 col0" >370</td>
+      <td id="T_fe028_row51_col1" class="data row51 col1" >Assinale a alternativa correta em relaçã ...</td>
+      <td id="T_fe028_row51_col2" class="data row51 col2" >A</td>
+      <td id="T_fe028_row51_col3" class="data row51 col3" >D</td>
+      <td id="T_fe028_row51_col4" class="data row51 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row52_col0" class="data row52 col0" >371</td>
+      <td id="T_fe028_row52_col1" class="data row52 col1" >José Antônio de Souza, integrante da cat ...</td>
+      <td id="T_fe028_row52_col2" class="data row52 col2" >C</td>
+      <td id="T_fe028_row52_col3" class="data row52 col3" >C</td>
+      <td id="T_fe028_row52_col4" class="data row52 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row53_col0" class="data row53 col0" >372</td>
+      <td id="T_fe028_row53_col1" class="data row53 col1" >Paulo, empregado da empresa Alegria Ltda ...</td>
+      <td id="T_fe028_row53_col2" class="data row53 col2" >A</td>
+      <td id="T_fe028_row53_col3" class="data row53 col3" >C</td>
+      <td id="T_fe028_row53_col4" class="data row53 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row54_col0" class="data row54 col0" >373</td>
+      <td id="T_fe028_row54_col1" class="data row54 col1" >Com relação ao contrato de aprendizagem, ...</td>
+      <td id="T_fe028_row54_col2" class="data row54 col2" >C</td>
+      <td id="T_fe028_row54_col3" class="data row54 col3" >C</td>
+      <td id="T_fe028_row54_col4" class="data row54 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row55_col0" class="data row55 col0" >374</td>
+      <td id="T_fe028_row55_col1" class="data row55 col1" >Foi celebrada convenção coletiva que fix ...</td>
+      <td id="T_fe028_row55_col2" class="data row55 col2" >D</td>
+      <td id="T_fe028_row55_col3" class="data row55 col3" >D</td>
+      <td id="T_fe028_row55_col4" class="data row55 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row56_col0" class="data row56 col0" >375</td>
+      <td id="T_fe028_row56_col1" class="data row56 col1" >A respeito do recurso de revista, é corr ...</td>
+      <td id="T_fe028_row56_col2" class="data row56 col2" >B</td>
+      <td id="T_fe028_row56_col3" class="data row56 col3" >C</td>
+      <td id="T_fe028_row56_col4" class="data row56 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row57_col0" class="data row57 col0" >376</td>
+      <td id="T_fe028_row57_col1" class="data row57 col1" >Quanto ao cabimento do mandado de segura ...</td>
+      <td id="T_fe028_row57_col2" class="data row57 col2" >A</td>
+      <td id="T_fe028_row57_col3" class="data row57 col3" >A</td>
+      <td id="T_fe028_row57_col4" class="data row57 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row58_col0" class="data row58 col0" >377</td>
+      <td id="T_fe028_row58_col1" class="data row58 col1" >Assinale a alternativa correta no que di ...</td>
+      <td id="T_fe028_row58_col2" class="data row58 col2" >B</td>
+      <td id="T_fe028_row58_col3" class="data row58 col3" >B</td>
+      <td id="T_fe028_row58_col4" class="data row58 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row59_col0" class="data row59 col0" >378</td>
+      <td id="T_fe028_row59_col1" class="data row59 col1" >Em audiência de conciliação, instrução e ...</td>
+      <td id="T_fe028_row59_col2" class="data row59 col2" >C</td>
+      <td id="T_fe028_row59_col3" class="data row59 col3" >A</td>
+      <td id="T_fe028_row59_col4" class="data row59 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row60_col0" class="data row60 col0" >379</td>
+      <td id="T_fe028_row60_col1" class="data row60 col1" >Lavrado auto de infração contra uma empr ...</td>
+      <td id="T_fe028_row60_col2" class="data row60 col2" >B</td>
+      <td id="T_fe028_row60_col3" class="data row60 col3" >A</td>
+      <td id="T_fe028_row60_col4" class="data row60 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row61_col0" class="data row61 col0" >380</td>
+      <td id="T_fe028_row61_col1" class="data row61 col1" >Alcides, advogado de longa data, resolve ...</td>
+      <td id="T_fe028_row61_col2" class="data row61 col2" >A</td>
+      <td id="T_fe028_row61_col3" class="data row61 col3" >B</td>
+      <td id="T_fe028_row61_col4" class="data row61 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row62_col0" class="data row62 col0" >381</td>
+      <td id="T_fe028_row62_col1" class="data row62 col1" >Na Secretaria Municipal de Fazenda, tram ...</td>
+      <td id="T_fe028_row62_col2" class="data row62 col2" >B</td>
+      <td id="T_fe028_row62_col3" class="data row62 col3" >B</td>
+      <td id="T_fe028_row62_col4" class="data row62 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row63_col0" class="data row63 col0" >382</td>
+      <td id="T_fe028_row63_col1" class="data row63 col1" >A empresa Frios e Gelados S.A. promove a ...</td>
+      <td id="T_fe028_row63_col2" class="data row63 col2" >B</td>
+      <td id="T_fe028_row63_col3" class="data row63 col3" >B</td>
+      <td id="T_fe028_row63_col4" class="data row63 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row64_col0" class="data row64 col0" >383</td>
+      <td id="T_fe028_row64_col1" class="data row64 col1" >Manoel, empresário, promove ação de sepa ...</td>
+      <td id="T_fe028_row64_col2" class="data row64 col2" >B</td>
+      <td id="T_fe028_row64_col3" class="data row64 col3" >B</td>
+      <td id="T_fe028_row64_col4" class="data row64 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row65_col0" class="data row65 col0" >384</td>
+      <td id="T_fe028_row65_col1" class="data row65 col1" >A Administração Pública, por meio de det ...</td>
+      <td id="T_fe028_row65_col2" class="data row65 col2" >C</td>
+      <td id="T_fe028_row65_col3" class="data row65 col3" >C</td>
+      <td id="T_fe028_row65_col4" class="data row65 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row66_col0" class="data row66 col0" >385</td>
+      <td id="T_fe028_row66_col1" class="data row66 col1" >José foi condenado criminalmente, com se ...</td>
+      <td id="T_fe028_row66_col2" class="data row66 col2" >D</td>
+      <td id="T_fe028_row66_col3" class="data row66 col3" >A</td>
+      <td id="T_fe028_row66_col4" class="data row66 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row67_col0" class="data row67 col0" >386</td>
+      <td id="T_fe028_row67_col1" class="data row67 col1" >Conceição promove ação possessória em fa ...</td>
+      <td id="T_fe028_row67_col2" class="data row67 col2" >C</td>
+      <td id="T_fe028_row67_col3" class="data row67 col3" >C</td>
+      <td id="T_fe028_row67_col4" class="data row67 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row68_col0" class="data row68 col0" >387</td>
+      <td id="T_fe028_row68_col1" class="data row68 col1" >No julgamento da ação envolvendo Manoel  ...</td>
+      <td id="T_fe028_row68_col2" class="data row68 col2" >D</td>
+      <td id="T_fe028_row68_col3" class="data row68 col3" >D</td>
+      <td id="T_fe028_row68_col4" class="data row68 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row69_col0" class="data row69 col0" >388</td>
+      <td id="T_fe028_row69_col1" class="data row69 col1" >Ademir, formado em Jornalismo e Direito  ...</td>
+      <td id="T_fe028_row69_col2" class="data row69 col2" >C</td>
+      <td id="T_fe028_row69_col3" class="data row69 col3" >C</td>
+      <td id="T_fe028_row69_col4" class="data row69 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row70_col0" class="data row70 col0" >389</td>
+      <td id="T_fe028_row70_col1" class="data row70 col1" >O advogado Antônio é convocado para pres ...</td>
+      <td id="T_fe028_row70_col2" class="data row70 col2" >C</td>
+      <td id="T_fe028_row70_col3" class="data row70 col3" >C</td>
+      <td id="T_fe028_row70_col4" class="data row70 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row71_col0" class="data row71 col0" >390</td>
+      <td id="T_fe028_row71_col1" class="data row71 col1" >Tício é advogado regularmente inscrito n ...</td>
+      <td id="T_fe028_row71_col2" class="data row71 col2" >B</td>
+      <td id="T_fe028_row71_col3" class="data row71 col3" >B</td>
+      <td id="T_fe028_row71_col4" class="data row71 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row72_col0" class="data row72 col0" >391</td>
+      <td id="T_fe028_row72_col1" class="data row72 col1" >Crésio é procurado por cliente que já po ...</td>
+      <td id="T_fe028_row72_col2" class="data row72 col2" >C</td>
+      <td id="T_fe028_row72_col3" class="data row72 col3" >C</td>
+      <td id="T_fe028_row72_col4" class="data row72 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row73_col0" class="data row73 col0" >392</td>
+      <td id="T_fe028_row73_col1" class="data row73 col1" >A respeito da internacionalização dos di ...</td>
+      <td id="T_fe028_row73_col2" class="data row73 col2" >C</td>
+      <td id="T_fe028_row73_col3" class="data row73 col3" >C</td>
+      <td id="T_fe028_row73_col4" class="data row73 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row74_col0" class="data row74 col0" >393</td>
+      <td id="T_fe028_row74_col1" class="data row74 col1" >As Constituições brasileiras se mostrara ...</td>
+      <td id="T_fe028_row74_col2" class="data row74 col2" >B</td>
+      <td id="T_fe028_row74_col3" class="data row74 col3" >B</td>
+      <td id="T_fe028_row74_col4" class="data row74 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row75_col0" class="data row75 col0" >394</td>
+      <td id="T_fe028_row75_col1" class="data row75 col1" >No âmbito dos direitos humanos, a respei ...</td>
+      <td id="T_fe028_row75_col2" class="data row75 col2" >A</td>
+      <td id="T_fe028_row75_col3" class="data row75 col3" >A</td>
+      <td id="T_fe028_row75_col4" class="data row75 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row76_col0" class="data row76 col0" >395</td>
+      <td id="T_fe028_row76_col1" class="data row76 col1" >A embaixada de um estado estrangeiro loc ...</td>
+      <td id="T_fe028_row76_col2" class="data row76 col2" >B</td>
+      <td id="T_fe028_row76_col3" class="data row76 col3" >B</td>
+      <td id="T_fe028_row76_col4" class="data row76 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row77_col0" class="data row77 col0" >396</td>
+      <td id="T_fe028_row77_col1" class="data row77 col1" >Em janeiro de 2003, Martin e Clarisse Gr ...</td>
+      <td id="T_fe028_row77_col2" class="data row77 col2" >B</td>
+      <td id="T_fe028_row77_col3" class="data row77 col3" >B</td>
+      <td id="T_fe028_row77_col4" class="data row77 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row78_col0" class="data row78 col0" >397</td>
+      <td id="T_fe028_row78_col1" class="data row78 col1" >Se Governador de Estado desejar se insur ...</td>
+      <td id="T_fe028_row78_col2" class="data row78 col2" >D</td>
+      <td id="T_fe028_row78_col3" class="data row78 col3" >C</td>
+      <td id="T_fe028_row78_col4" class="data row78 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row79_col0" class="data row79 col0" >398</td>
+      <td id="T_fe028_row79_col1" class="data row79 col1" >Os Estados são autônomos e compõem a Fed ...</td>
+      <td id="T_fe028_row79_col2" class="data row79 col2" >D</td>
+      <td id="T_fe028_row79_col3" class="data row79 col3" >A</td>
+      <td id="T_fe028_row79_col4" class="data row79 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row80_col0" class="data row80 col0" >399</td>
+      <td id="T_fe028_row80_col1" class="data row80 col1" >No processo de impedimento do Presidente ...</td>
+      <td id="T_fe028_row80_col2" class="data row80 col2" >D</td>
+      <td id="T_fe028_row80_col3" class="data row80 col3" >A</td>
+      <td id="T_fe028_row80_col4" class="data row80 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row81_col0" class="data row81 col0" >400</td>
+      <td id="T_fe028_row81_col1" class="data row81 col1" >Lei estadual que regulamenta o serviço d ...</td>
+      <td id="T_fe028_row81_col2" class="data row81 col2" >D</td>
+      <td id="T_fe028_row81_col3" class="data row81 col3" >B</td>
+      <td id="T_fe028_row81_col4" class="data row81 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row82_col0" class="data row82 col0" >401</td>
+      <td id="T_fe028_row82_col1" class="data row82 col1" >No que tange ao direito de nacionalidade ...</td>
+      <td id="T_fe028_row82_col2" class="data row82 col2" >B</td>
+      <td id="T_fe028_row82_col3" class="data row82 col3" >A</td>
+      <td id="T_fe028_row82_col4" class="data row82 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row83_col0" class="data row83 col0" >402</td>
+      <td id="T_fe028_row83_col1" class="data row83 col1" >A iniciativa popular é uma das formas de ...</td>
+      <td id="T_fe028_row83_col2" class="data row83 col2" >C</td>
+      <td id="T_fe028_row83_col3" class="data row83 col3" >A</td>
+      <td id="T_fe028_row83_col4" class="data row83 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row84_col0" class="data row84 col0" >403</td>
+      <td id="T_fe028_row84_col1" class="data row84 col1" >O habeas data não pode ser impetrado em  ...</td>
+      <td id="T_fe028_row84_col2" class="data row84 col2" >A</td>
+      <td id="T_fe028_row84_col3" class="data row84 col3" >A</td>
+      <td id="T_fe028_row84_col4" class="data row84 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row85_col0" class="data row85 col0" >404</td>
+      <td id="T_fe028_row85_col1" class="data row85 col1" >Com nítida inspiração na doutrina da pro ...</td>
+      <td id="T_fe028_row85_col2" class="data row85 col2" >B</td>
+      <td id="T_fe028_row85_col3" class="data row85 col3" >B</td>
+      <td id="T_fe028_row85_col4" class="data row85 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row86_col0" class="data row86 col0" >405</td>
+      <td id="T_fe028_row86_col1" class="data row86 col1" >Fernando e Eulália decidiram adotar uma  ...</td>
+      <td id="T_fe028_row86_col2" class="data row86 col2" >C</td>
+      <td id="T_fe028_row86_col3" class="data row86 col3" >C</td>
+      <td id="T_fe028_row86_col4" class="data row86 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row87_col0" class="data row87 col0" >406</td>
+      <td id="T_fe028_row87_col1" class="data row87 col1" >No que tange à chamada ação de improbida ...</td>
+      <td id="T_fe028_row87_col2" class="data row87 col2" >C</td>
+      <td id="T_fe028_row87_col3" class="data row87 col3" >C</td>
+      <td id="T_fe028_row87_col4" class="data row87 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row88_col0" class="data row88 col0" >407</td>
+      <td id="T_fe028_row88_col1" class="data row88 col1" >A estruturação da Administração traz a p ...</td>
+      <td id="T_fe028_row88_col2" class="data row88 col2" >B</td>
+      <td id="T_fe028_row88_col3" class="data row88 col3" >B</td>
+      <td id="T_fe028_row88_col4" class="data row88 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row89_col0" class="data row89 col0" >408</td>
+      <td id="T_fe028_row89_col1" class="data row89 col1" >A revogação representa uma das formas de ...</td>
+      <td id="T_fe028_row89_col2" class="data row89 col2" >C</td>
+      <td id="T_fe028_row89_col3" class="data row89 col3" >C</td>
+      <td id="T_fe028_row89_col4" class="data row89 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row90_col0" class="data row90 col0" >409</td>
+      <td id="T_fe028_row90_col1" class="data row90 col1" >Tendo o agente público atuado nesta qual ...</td>
+      <td id="T_fe028_row90_col2" class="data row90 col2" >A</td>
+      <td id="T_fe028_row90_col3" class="data row90 col3" >A</td>
+      <td id="T_fe028_row90_col4" class="data row90 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row91_col0" class="data row91 col0" >410</td>
+      <td id="T_fe028_row91_col1" class="data row91 col1" >O art. 37, II, da Constituição da Repúbl ...</td>
+      <td id="T_fe028_row91_col2" class="data row91 col2" >D</td>
+      <td id="T_fe028_row91_col3" class="data row91 col3" >B</td>
+      <td id="T_fe028_row91_col4" class="data row91 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row92_col0" class="data row92 col0" >411</td>
+      <td id="T_fe028_row92_col1" class="data row92 col1" >De acordo com o critério da titularidade ...</td>
+      <td id="T_fe028_row92_col2" class="data row92 col2" >D</td>
+      <td id="T_fe028_row92_col3" class="data row92 col3" >D</td>
+      <td id="T_fe028_row92_col4" class="data row92 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row93_col0" class="data row93 col0" >412</td>
+      <td id="T_fe028_row93_col1" class="data row93 col1" >Em relação à união estável, assinale a a ...</td>
+      <td id="T_fe028_row93_col2" class="data row93 col2" >C</td>
+      <td id="T_fe028_row93_col3" class="data row93 col3" >B</td>
+      <td id="T_fe028_row93_col4" class="data row93 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row94_col0" class="data row94 col0" >413</td>
+      <td id="T_fe028_row94_col1" class="data row94 col1" >João trafegava com seu veículo com veloc ...</td>
+      <td id="T_fe028_row94_col2" class="data row94 col2" >C</td>
+      <td id="T_fe028_row94_col3" class="data row94 col3" >C</td>
+      <td id="T_fe028_row94_col4" class="data row94 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row95_col0" class="data row95 col0" >414</td>
+      <td id="T_fe028_row95_col1" class="data row95 col1" >Heitor, solteiro e pai de dois filhos ta ...</td>
+      <td id="T_fe028_row95_col2" class="data row95 col2" >C</td>
+      <td id="T_fe028_row95_col3" class="data row95 col3" >C</td>
+      <td id="T_fe028_row95_col4" class="data row95 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row96_col0" class="data row96 col0" >415</td>
+      <td id="T_fe028_row96_col1" class="data row96 col1" >Durante assembleia realizada em condomín ...</td>
+      <td id="T_fe028_row96_col2" class="data row96 col2" >B</td>
+      <td id="T_fe028_row96_col3" class="data row96 col3" >A</td>
+      <td id="T_fe028_row96_col4" class="data row96 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row97_col0" class="data row97 col0" >416</td>
+      <td id="T_fe028_row97_col1" class="data row97 col1" >O decurso do tempo exerce efeitos sobre  ...</td>
+      <td id="T_fe028_row97_col2" class="data row97 col2" >A</td>
+      <td id="T_fe028_row97_col3" class="data row97 col3" >D</td>
+      <td id="T_fe028_row97_col4" class="data row97 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row98_col0" class="data row98 col0" >417</td>
+      <td id="T_fe028_row98_col1" class="data row98 col1" >Em instrumento particular, subscrito por ...</td>
+      <td id="T_fe028_row98_col2" class="data row98 col2" >A</td>
+      <td id="T_fe028_row98_col3" class="data row98 col3" >A</td>
+      <td id="T_fe028_row98_col4" class="data row98 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row99_col0" class="data row99 col0" >418</td>
+      <td id="T_fe028_row99_col1" class="data row99 col1" >A dação em pagamento é</td>
+      <td id="T_fe028_row99_col2" class="data row99 col2" >C</td>
+      <td id="T_fe028_row99_col3" class="data row99 col3" >C</td>
+      <td id="T_fe028_row99_col4" class="data row99 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row100_col0" class="data row100 col0" >419</td>
+      <td id="T_fe028_row100_col1" class="data row100 col1" >Numa ação de reintegração de posse em qu ...</td>
+      <td id="T_fe028_row100_col2" class="data row100 col2" >B</td>
+      <td id="T_fe028_row100_col3" class="data row100 col3" >B</td>
+      <td id="T_fe028_row100_col4" class="data row100 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row101_col0" class="data row101 col0" >420</td>
+      <td id="T_fe028_row101_col1" class="data row101 col1" >Considerando a ação de execução de títul ...</td>
+      <td id="T_fe028_row101_col2" class="data row101 col2" >C</td>
+      <td id="T_fe028_row101_col3" class="data row101 col3" >D</td>
+      <td id="T_fe028_row101_col4" class="data row101 col4" >Errado</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row102_col0" class="data row102 col0" >421</td>
+      <td id="T_fe028_row102_col1" class="data row102 col1" >O Ministério Público ajuizou ação rescis ...</td>
+      <td id="T_fe028_row102_col2" class="data row102 col2" >D</td>
+      <td id="T_fe028_row102_col3" class="data row102 col3" >D</td>
+      <td id="T_fe028_row102_col4" class="data row102 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row103_col0" class="data row103 col0" >422</td>
+      <td id="T_fe028_row103_col1" class="data row103 col1" >Zélia e Joaquim são vizinhos há cerca de ...</td>
+      <td id="T_fe028_row103_col2" class="data row103 col2" >C</td>
+      <td id="T_fe028_row103_col3" class="data row103 col3" >C</td>
+      <td id="T_fe028_row103_col4" class="data row103 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row104_col0" class="data row104 col0" >423</td>
+      <td id="T_fe028_row104_col1" class="data row104 col1" >No curso dos processos, os juízes são do ...</td>
+      <td id="T_fe028_row104_col2" class="data row104 col2" >A</td>
+      <td id="T_fe028_row104_col3" class="data row104 col3" >A</td>
+      <td id="T_fe028_row104_col4" class="data row104 col4" >Certo</td>
+    </tr>
+    <tr>
+      <td id="T_fe028_row105_col0" class="data row105 col0" >424</td>
+      <td id="T_fe028_row105_col1" class="data row105 col1" >A respeito da liquidação de sentença, as ...</td>
+      <td id="T_fe028_row105_col2" class="data row105 col2" >A</td>
+      <td id="T_fe028_row105_col3" class="data row105 col3" >C</td>
+      <td id="T_fe028_row105_col4" class="data row105 col4" >Errado</td>
+    </tr>
+  </tbody>
+</table>
+
+        </div>
+    </body>
+    </html>
