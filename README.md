@@ -1,5 +1,5 @@
 
-# 📚 Tópicos Avançados 2026.1 — Equipe 1 JUD | Atividade 1
+# 📚 Tópicos Avançados 2026.1 — Equipe 1 JURÍDICO | Atividade 1
 
 ## ⚖️ Inferência Utilizando LLMs para o Domínio Jurídico  
 ### 📄 Relatório — Grupo 1
