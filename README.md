@@ -35,7 +35,7 @@
 | Rafael Takeguma Goto | 202611000170 |
 | Renato Fernandes Pereira | 202521001606 |
 | Thomás Silva de Araujo | 202521000574 |
-| Wilson Dias Martins Neto | 202611009022 |
+
 
 
 
