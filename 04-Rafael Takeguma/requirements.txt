@@ -1,0 +1,5 @@
+datasets>=4.8.4
+google-genai>=1.70.0
+matplotlib>=3.10.8
+pandas>=3.0.1
+python-dotenv>=1.0.1
